@@ -1,0 +1,54 @@
+
+
+  <html>
+<body>
+    <form>
+    <label name="prompt" id="prompt">Prompt:</label> <br>
+
+    <textarea name="text" rows="4" cols="50">
+   
+    </textarea> <input type="button" value="Enviar"><br>
+   </form>
+    <label name="resposta" id="resposta">Resposta:</label> <br>
+
+    <textarea name="text" rows="4" cols="50">
+   
+    </textarea>
+
+      <script type="importmap">
+        {
+          "imports": {
+            "@google/generative-ai": "https://esm.run/@google/generative-ai"
+          }
+        }
+      </script>
+  <!-- ... Your HTML and CSS -->
+  <!-- Import @google/generative-ai, as shown above. -->
+  <script type="module">
+      import { GoogleGenerativeAI } from "@google/generative-ai";
+
+      // Fetch your API_KEY
+      const API_KEY = "AIzaSyAZiRcKQnUxl8KmDmux1KUreqnjRD_10Ew";
+
+      // Access your API key (see "Set up your API key" above)
+      const genAI = new GoogleGenerativeAI(API_KEY);
+
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
+
+async function run() {
+  const prompt = "Gemini"
+
+  const result = await model.generateContent(prompt);
+  const response = await result.response;
+  const text = response.text();
+  
+  document.getElementById("resposta").value = text;
+  console.log(text);
+}
+
+run();
+
+</script>
+
+</body>
+</html>
